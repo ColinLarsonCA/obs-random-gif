@@ -1,0 +1,57 @@
+<html>
+    <style>
+        .bounded {
+            height: 200px;
+            width: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #gif {
+            max-height: 200px;
+            width: auto;
+        }
+
+        .base.hidden {
+            opacity: 0;
+        }
+
+        .base {
+            -webkit-transition: opacity 1s ease-in-out;
+            -moz-transition: opacity 1s ease-in-out;
+            -ms-transition: opacity 1s ease-in-out;
+            -o-transition: opacity 1s ease-in-out;
+            opacity: 1;
+        }
+    </style>
+    <div class="bounded">
+        <img id="gif" class="base hidden" src="1.gif">
+    </div>
+
+    <script>
+        var elem = document.getElementById('gif');
+        var numGifs = 233;
+        var hideSec = 6.9;
+        var showGifMinSec = 10;
+        var showGifMaxSec = 10;
+
+        hideGif(); //kick it off
+        function showRandomGif() {
+            num = random(1, numGifs);
+            elem.src = num + ".gif";
+            elem.className = "base";
+            setTimeout(hideGif, hideSec*1000);
+        }
+
+        function hideGif() {
+            elem.className = "base hidden";
+            nextGifMs = random(showGifMinSec*1000, showGifMaxSec*1000);
+            setTimeout(showRandomGif, nextGifMs);
+        }
+
+        function random(min, max) { //fully inclusive
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+    </script>
+</html>
